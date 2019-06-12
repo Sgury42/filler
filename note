@@ -1,0 +1,6 @@
+
+get_next_line(0, &line)  0 == entree standard
+
+donner notre reponse => ft_putstr_fd("X Y\n", 1);  1 == sortie standard
+
+
