@@ -6,79 +6,83 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:02:11 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/12 15:30:42 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/13 15:06:30 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static int	get_map_size(t_map *map, char *buffer)
+static char	*get_player(t_map *map, char *buff)
 {
-	map->x = 0;
-	map->y = 0;
-	while (ft_isdigit(*buffer) == 0)
-	{
-//		ft_putchar_fd(*buffer, 2);
-		buffer++;
-	}
-	ft_putstr_fd("*buffer digit = ", 2);
-	ft_putchar_fd(*buffer, 2);
-	while (ft_isdigit(*buffer))
-	{
-		map->x = map->x * 10 + *buffer - '0';
-		buffer++;
-	}
-	while (ft_isdigit(*buffer) == 0)
-		buffer++;
-	while (ft_isdigit(*buffer))
-	{
-		map->y = map->y * 10 + *buffer - '0';
-		buffer++;
-	}
-	ft_putstr_fd("x = ", 2);
-	ft_putnbr_fd(map->x, 2);
-	ft_putstr_fd("y = ", 2);
-	ft_putnbr_fd(map->y, 2);
-	return (0);
+	if ((buff = ft_strchr(buff, 'p')) == NULL)
+		return (NULL);
+	buff++;
+	if (*buff == '1')
+		ft_strcat(map->player, "oO");
+	else if (*buff == '2')
+		ft_strcat(map->player, "xX");
+	else
+		return (NULL);
+	return (buff);
 }
-/*
-static int	checkmap(t_map map, char **buffer);
+
+static char	*get_map_size(t_map *map, char *buff)
+{
+	if ((buff = ft_strstr(buff, "Plateau")) == NULL)
+		return (NULL);
+	while (ft_isdigit(*buff) == 0)
+		buff++;
+	while (ft_isdigit(*buff))
+	{
+		map->x = map->x * 10 + *buff - '0';
+		buff++;
+	}
+	while (ft_isdigit(*buff) == 0)
+		buff++;
+	while (ft_isdigit(*buff))
+	{
+		map->y = map->y * 10 + *buff - '0';
+		buff++;
+	}
+	return (buff);
+}
+
+static char	*checkmap(t_map *map, char *buff)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j - 0;
-	while (*buffer != '\0' && *buffer != 'P')
+	j = 0;
+	if ((map->map = (char **)malloc(sizeof(char *) * (map->x + 1))) == NULL)
+		return (NULL);
+	while (*buff != '\0' && *buff != 'P')
 	{
-		while (*buffer != '.')
-			buffer++;
-		while (ft_strchr(".oOxX", *buffer))
-		{
-			map[i][j++] = *buffer++;
-		}
+		if ((map->map[i] = ft_strnew(map->y)) == NULL)
+			return (NULL);
+		while (*buff && !(ft_strchr(".oOxX", *buff)))
+			buff++;
+		while (ft_strchr(".oOxX", *buff))
+			map->map[i][j++] = *buff++;
 		if (j != map->y)
-			return (-1);
+			return (NULL);
 		j = 0;
 		i++;
 	}
+	map->map[i] = 0;
 	if (i != map->x)
-		return (-1);
-	return (0);
-} */
+		return (NULL);
+	return (buff);
+} 
 
-int		ft_get_map(char *buff)
+char		*ft_get_map(t_map *map, char *buff)
 {
-	t_map	map;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = ft_strstr(buff, "Plateau");
-//	ft_strdel(buff);
-	buff = tmp;
-	get_map_size(&map, buff);
-//	if (checkmap(map, &buffer) < 0)
-//		return (-1);
-	return (0);
+	if (*buff == '$')
+		if ((buff = get_player(map, buff)) == NULL)
+			return (NULL);
+	if ((buff = get_map_size(map, buff)) == NULL)
+		return (NULL);
+	if ((buff = checkmap(map, buff)) == NULL)
+		return (NULL);
+	return (buff);
 }

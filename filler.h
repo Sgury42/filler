@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/12 15:15:03 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/13 15:47:35 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,9 @@
 # include "libft/libft.h"
 # include "utils/get_next_line.h"
 
-typedef struct	s_buff
-{
-	char	buffer[4096];
-}				t_buff;
-
 typedef struct	s_map
 {
+	char	player[2];
 	int		x;		//height
 	int 	y;		//width
 	char	**map;
@@ -41,7 +37,16 @@ typedef struct	s_piece
 //void			ft_putchar(char c);
 //void			ft_putstr_fd(char *str, int fd);
 //int				ft_printf(const char *format, ...);
-int				ft_get_map(char *buff);
+char			*ft_get_map(t_map *map, char *buff);
+int				ft_get_piece(t_piece *piece, char *buff);
 //char			*ft_strcat(char *s1, const char *s2);
+
+
+
+/*			FONCTIONS FOR TESTS			*/
+
+void			ft_put_wrd_tab_fd(char **tab, char *separator, int fd);
+void			display_mapstruct(t_map *map);
+void			display_piece_struct(t_piece *piece);
 
 #endif
