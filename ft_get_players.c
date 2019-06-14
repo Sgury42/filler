@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_get_players.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 09:10:01 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/14 14:41:52 by sgury            ###   ########.fr       */
+/*   Created: 2019/06/14 14:13:52 by sgury             #+#    #+#             */
+/*   Updated: 2019/06/14 15:20:38 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcat(char *s1, const char *s2)
-{
-	int	i;
-	int	j;
+#include "filler.h"
 
-	i = 0;
-	j = 0;
-	while (s1[i] != '\0')
-		i++;
-	while (s2[j] != '\0')
-		s1[i++] = s2[j++];
-	s1[i] = '\0';
-	return (s1);
+char	*ft_get_players(t_map *map, char *buff)
+{
+	ft_bzero(map, sizeof(t_map));
+	if ((buff = ft_strchr(buff, 'p')) == NULL)
+		return (NULL);
+	buff++;
+	if (*buff == '1')
+	{
+		ft_strcat(map->player, "oO");
+		ft_strcat(map->enemy, "xX");
+	}
+	if (*buff == '2')
+	{
+		ft_strcat(map->player, "xX");
+		ft_strcat(map->enemy, "oO");
+	}
+	else
+		return (NULL);
+	return (buff);
 }

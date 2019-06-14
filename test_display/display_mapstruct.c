@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:39:25 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/13 14:48:28 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/14 15:20:01 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,7 @@ void	display_mapstruct(t_map *map)
 	ft_putstr_fd("player = ", 2);
 	ft_putstr_fd(map->player, 2);
 	ft_putchar_fd('\n', 2);
+	ft_putstr_fd("enemy = ", 2);
+	ft_putstr_fd(map->enemy, 2);
+	ft_putstr_fd("\n\n\n", 2);
 }

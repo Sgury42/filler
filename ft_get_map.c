@@ -6,44 +6,22 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:02:11 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/13 15:06:30 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/14 15:30:49 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static char	*get_player(t_map *map, char *buff)
-{
-	if ((buff = ft_strchr(buff, 'p')) == NULL)
-		return (NULL);
-	buff++;
-	if (*buff == '1')
-		ft_strcat(map->player, "oO");
-	else if (*buff == '2')
-		ft_strcat(map->player, "xX");
-	else
-		return (NULL);
-	return (buff);
-}
-
 static char	*get_map_size(t_map *map, char *buff)
 {
 	if ((buff = ft_strstr(buff, "Plateau")) == NULL)
 		return (NULL);
-	while (ft_isdigit(*buff) == 0)
+	while (*buff && !ft_isdigit(*buff))
 		buff++;
-	while (ft_isdigit(*buff))
-	{
-		map->x = map->x * 10 + *buff - '0';
-		buff++;
-	}
-	while (ft_isdigit(*buff) == 0)
-		buff++;
-	while (ft_isdigit(*buff))
-	{
-		map->y = map->y * 10 + *buff - '0';
-		buff++;
-	}
+	map->x = ft_atoi(buff);
+	if ((buff = ft_strchr(buff, ' ')) == NULL)
+		return (NULL);
+	map->y = ft_atoi(buff);
 	return (buff);
 }
 
@@ -56,7 +34,7 @@ static char	*checkmap(t_map *map, char *buff)
 	j = 0;
 	if ((map->map = (char **)malloc(sizeof(char *) * (map->x + 1))) == NULL)
 		return (NULL);
-	while (*buff != '\0' && *buff != 'P')
+	while (*buff && i < map->x)
 	{
 		if ((map->map[i] = ft_strnew(map->y)) == NULL)
 			return (NULL);
@@ -70,16 +48,11 @@ static char	*checkmap(t_map *map, char *buff)
 		i++;
 	}
 	map->map[i] = 0;
-	if (i != map->x)
-		return (NULL);
 	return (buff);
 } 
 
 char		*ft_get_map(t_map *map, char *buff)
 {
-	if (*buff == '$')
-		if ((buff = get_player(map, buff)) == NULL)
-			return (NULL);
 	if ((buff = get_map_size(map, buff)) == NULL)
 		return (NULL);
 	if ((buff = checkmap(map, buff)) == NULL)

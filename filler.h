@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/13 15:47:35 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/14 16:04:24 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 typedef struct	s_map
 {
-	char	player[2];
+	char	player[3];
+	char	enemy[3];
 	int		x;		//height
 	int 	y;		//width
 	char	**map;
@@ -31,15 +32,10 @@ typedef struct	s_piece
 	char	**piece;
 }				t_piece;
 
-//int				get_next_line(const int fd, char **line);
-//void			ft_putstr(char *str);
-//void			ft_strdel(char **as);
-//void			ft_putchar(char c);
-//void			ft_putstr_fd(char *str, int fd);
-//int				ft_printf(const char *format, ...);
+char			*ft_get_players(t_map *map, char *buff);
 char			*ft_get_map(t_map *map, char *buff);
 int				ft_get_piece(t_piece *piece, char *buff);
-//char			*ft_strcat(char *s1, const char *s2);
+void			ft_clear_data(char **map, char **piece);
 
 
 
