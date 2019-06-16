@@ -3,4 +3,6 @@ get_next_line(0, &line)  0 == entree standard
 
 donner notre reponse => ft_putstr_fd("X Y\n", 1);  1 == sortie standard
 
+gcc filler.c ft_get_map.c utils/get_next_line.c libft/libft.a test_display/display_mapstruct.c test_display/ft_put_wrd_tab_fd.c test_display/display_piece_struct.c ft_get_piece.c ft_clear_data.c ft_get_players.c
 
+resources/filler_vm -f resources/maps/map00 -p1 resources/players/carli.filler -p2 ./a.out 1> output

@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:02:11 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/14 15:30:49 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/16 11:45:45 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*checkmap(t_map *map, char *buff)
 		while (*buff && !(ft_strchr(".oOxX", *buff)))
 			buff++;
 		while (ft_strchr(".oOxX", *buff))
-			map->map[i][j++] = *buff++;
+			map->map[i][j++] = ft_toupper(*buff++);
 		if (j != map->y)
 			return (NULL);
 		j = 0;
