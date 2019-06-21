@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/16 12:11:51 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/21 14:40:38 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FILLER_H
 
 # include "libft/libft.h"
-# include "utils/get_next_line.h"
+# include "get_next_line/get_next_line.h"
 
 typedef struct	s_map
 {

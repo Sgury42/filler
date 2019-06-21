@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:18:09 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/16 12:11:55 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/21 16:31:00 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ static char	*get_buffer(char *buffer)
 
 int			main()
 {
+	char	buffer[10000];
 	char	*buff;
 	t_map	map;
 	t_piece piece;
 
-	if ((buff = get_buffer(buff)) == NULL)
+	if ((buff = get_buffer(buffer)) == NULL)
 		return (-1);
 	if (*buff == '$')
 		if ((buff = ft_get_players(&map, buff)) == NULL)
@@ -47,7 +48,7 @@ int			main()
 	display_piece_struct(&piece);
 	ft_score_map(&map);
 	display_mapstruct(&map);
-//	ft_place_piece(&map, &piece);
+	ft_place_piece(&map, &piece);
 	ft_clear_data(map.map, piece.piece); 
 	return (0);
 }
