@@ -30,12 +30,11 @@ static char	*get_buffer(char *buffer)
 
 int			main()
 {
-	char	buffer[4096];
 	char	*buff;
 	t_map	map;
 	t_piece piece;
 
-	if ((buff = get_buffer(buffer)) == NULL)
+	if ((buff = get_buffer(buff)) == NULL)
 		return (-1);
 	if (*buff == '$')
 		if ((buff = ft_get_players(&map, buff)) == NULL)
@@ -46,7 +45,8 @@ int			main()
 	if (ft_get_piece(&piece, buff) < 0)
 		return (-1);
 	display_piece_struct(&piece);
-//	ft_score_map(&map);
+	ft_score_map(&map);
+	display_mapstruct(&map);
 //	ft_place_piece(&map, &piece);
 	ft_clear_data(map.map, piece.piece); 
 	return (0);

@@ -18,9 +18,9 @@
 
 typedef struct	s_map
 {
-	char	player[3];
-	char	enemy[3];
-	int		x;		//height
+	char	player;
+	char	enemy;
+	int	x;		//height
 	int 	y;		//width
 	char	**map;
 }				t_map;
@@ -36,7 +36,7 @@ char			*ft_get_players(t_map *map, char *buff);
 char			*ft_get_map(t_map *map, char *buff);
 int				ft_get_piece(t_piece *piece, char *buff);
 void			ft_clear_data(char **map, char **piece);
-
+void			ft_score_map(t_map *map);
 
 
 /*			FONCTIONS FOR TESTS			*/

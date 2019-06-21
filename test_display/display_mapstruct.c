@@ -23,9 +23,9 @@ void	display_mapstruct(t_map *map)
 	ft_putnbr_fd(map->y, 2);
 	ft_putchar_fd('\n', 2);
 	ft_putstr_fd("player = ", 2);
-	ft_putstr_fd(map->player, 2);
+	ft_putchar_fd(map->player, 2);
 	ft_putchar_fd('\n', 2);
 	ft_putstr_fd("enemy = ", 2);
-	ft_putstr_fd(map->enemy, 2);
+	ft_putchar_fd(map->enemy, 2);
 	ft_putstr_fd("\n\n\n", 2);
 }

@@ -19,13 +19,13 @@ char	*ft_get_players(t_map *map, char *buff)
 	buff++;
 	if (*buff == '1')
 	{
-		ft_strcat(map->player, 'O');
-		ft_strcat(map->enemy, 'X');
+		map->player = 'O';
+		map->enemy = 'X';
 	}
 	if (*buff == '2')
 	{
-		ft_strcat(map->player, 'X');
-		ft_strcat(map->enemy, 'O');
+		map->player = 'X';
+		map->enemy = 'O';
 	}
 	else
 		return (NULL);
