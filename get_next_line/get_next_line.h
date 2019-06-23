@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:07:57 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/11 13:38:11 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/23 18:29:21 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
-# define BUFF_SIZE 4096
+# define BUFF_SIZE 10
 # define FD_MAX 4864
 
 int		get_next_line(const int fd, char **line);

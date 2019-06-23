@@ -6,7 +6,7 @@
 #    By: sgury <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/21 09:55:16 by sgury             #+#    #+#              #
-#    Updated: 2019/06/21 16:31:59 by sgury            ###   ########.fr        #
+#    Updated: 2019/06/23 16:40:01 by sgury            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ DISPLAY = display/display_mapstruct.c \
 		  display/display_piece_struct.c \
 		  display/ft_put_wrd_tab_fd.c
 
-OBJS = $(SRCS: .c=.o)
+OBJS = $(SRCS:.c=.o)
 
 INCLUDES = filler.h
 

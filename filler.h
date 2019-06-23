@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/21 14:40:38 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/23 17:10:14 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char			*ft_get_map(t_map *map, char *buff);
 int				ft_get_piece(t_piece *piece, char *buff);
 void			ft_clear_data(char **map, char **piece);
 void			ft_score_map(t_map *map);
+char			*ft_place_piece(t_map *map, t_piece *piece);
 
 
 /*			FONCTIONS FOR TESTS			*/
