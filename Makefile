@@ -6,7 +6,7 @@
 #    By: sgury <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/21 09:55:16 by sgury             #+#    #+#              #
-#    Updated: 2019/06/23 18:36:40 by sgury            ###   ########.fr        #
+#    Updated: 2019/06/24 14:38:30 by sgury            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,11 @@ $(LIBFT):
 
 clean:
 	rm -rf $(OBJS)
-	clean -C libft/
+#	clean -C libft/
 
 fclean: clean
 	rm -rf $(NAME)
-	fclean -C libft/
+#	fclean -C libft/
 
 re: fclean all
 
