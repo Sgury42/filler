@@ -6,54 +6,54 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 15:00:08 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/14 16:04:20 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/24 11:36:56 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static char	*get_piece_size(t_piece *piece, char *buff)
+static void	get_piece_size(t_piece *piece, char *line)
 {
-	if ((buff = ft_strstr(buff, "Piece")) == NULL)
-		return (NULL);
-	while (*buff && !ft_isdigit(*buff))
-		buff++;
-	piece->x = ft_atoi(buff);
-	if ((buff = ft_strchr(buff, ' ')) == NULL)
-		return (NULL);
-	piece->y = ft_atoi(buff);
-	return (buff);
+	int	i;
+
+	i = 0;
+	while (line[i] && !ft_isdigit(line[i]))
+		i++;
+	piece->x = ft_atoi(&line[i]);
+	while (line[i] && line[i] != ' ')
+		i++;
+	piece->y = ft_atoi(&line[i]);
 }
 
-static int	check_piece(t_piece *piece, char *buff)
+int			ft_get_piece(t_piece *piece, char *line)
 {
+	int	length;
 	int	i;
 	int	j;
 
+	length = 0;
 	i = 0;
 	j = 0;
+	get_piece_size(piece, line);
+	ft_strdel(&line);
 	if ((piece->piece = (char **)malloc(sizeof(char *) * (piece->x + 1))) == NULL)
 		return (-1);
-	while (*buff && !(ft_strchr(".*", *buff)))
-		buff++;
-	while (*buff && i < piece->x)
+	while (length < piece->x)
 	{
+		if ((get_next_line(0, &line)) < 0)
+			return (-1);
 		if ((piece->piece[i] = ft_strnew(piece->y)) == NULL)
 			return (-1);
-		while (*buff && j < piece->y)
-			piece->piece[i][j++] = *buff++;
+		while(line[j] && j < piece->y)
+		{
+			piece->piece[i][j] = line[j];
+			j++;
+		}
+		ft_strdel(&line);
 		j = 0;
 		i++;
+		length++;
 	}
 	piece->piece[i] = 0;
-	return (0);
-}
-
-int			ft_get_piece(t_piece *piece, char *buff)
-{
-	if ((buff = get_piece_size(piece, buff)) == NULL)
-		return (-1);
-	if (check_piece(piece, buff) < 0)
-		return (-1);
 	return (0);
 }

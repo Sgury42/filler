@@ -6,28 +6,30 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 14:13:52 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/16 12:11:59 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/24 11:36:53 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-char	*ft_get_players(t_map *map, char *buff)
+int		ft_get_players(t_map *map, char *line)
 {
-	if ((buff = ft_strchr(buff, 'p')) == NULL)
-		return (NULL);
-	buff++;
-	if (*buff == '1')
+	int	i;
+
+	i = 0;
+	while (line[i] != 'p')
+		i++;
+	i++;
+	if (line[i] == '1')
 	{
 		map->player = 'O';
 		map->enemy = 'X';
 	}
-	if (*buff == '2')
+	if (line[i] == '2')
 	{
 		map->player = 'X';
 		map->enemy = 'O';
 	}
-	else
-		return (NULL);
-	return (buff);
+	ft_strdel(&line);
+	return (0);
 }
