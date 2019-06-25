@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/24 15:32:12 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/25 14:48:39 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct	s_map
 {
 	char	player;
 	char	enemy;
-	int	x;		//height
+	int		x;		//height
 	int 	y;		//width
 	char	**map;
 }				t_map;
@@ -34,8 +34,6 @@ typedef struct	s_piece
 
 typedef struct	s_solution
 {
-	int		i;
-	int		j;
 	int		x;
 	int		y;
 	int		score;

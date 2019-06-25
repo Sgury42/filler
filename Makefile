@@ -6,7 +6,7 @@
 #    By: sgury <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/21 09:55:16 by sgury             #+#    #+#              #
-#    Updated: 2019/06/24 14:38:30 by sgury            ###   ########.fr        #
+#    Updated: 2019/06/25 14:49:08 by sgury            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS = filler.c \
 	   ft_score_map.c \
 	   ft_place_piece.c \
 	   ft_clear_data.c \
-	   get_next_line/get_next_line.c
+	   get_next_line/get_next_line.c 
 
 DISPLAY = display/display_mapstruct.c \
 		  display/display_piece_struct.c \

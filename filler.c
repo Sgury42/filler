@@ -6,13 +6,13 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:18:09 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/24 14:45:16 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/25 16:43:29 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int			main()
+int	main(void)
 {
 	char	*line;
 	t_map	map;
@@ -40,8 +40,6 @@ int			main()
 //		display_piece_struct(&piece);
 		ft_score_map(&map);
 //		display_mapstruct(&map);
-//		if ((ft_place_piece(&map, &piece)) < 0)
-//			return (-1);
 		ft_place_piece(&map, &piece);
 		ft_clear_data(map.map, piece.piece); 
 	}

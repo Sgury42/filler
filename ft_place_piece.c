@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 10:15:42 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/24 15:32:14 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/25 15:52:22 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,61 +24,62 @@ static void	send_solution(int x, int y)
 	ft_putstr_fd(solution, 1);
 }
 
-static void get_score(t_map *map, t_piece *piece, t_solution *solution)
+static int	valid_spot(t_map *map, t_piece *piece, int x, int y)
 {
 	int	i;
 	int	j;
-	int	badspot;
-	int touch;
-	int	new_score;
+	int	touch;
+	int	score;
 
 	i = 0;
 	j = 0;
-	badspot = 0;
-	new_score = 0;
 	touch = 0;
+	score = 0;
 	while (i < piece->x)
 	{
 		while (j < piece->y)
 		{
-			if (piece->piece[i][j] == '*' && map->map[solution->i + i][solution->j + j] == map->enemy)
-			{
-				badspot = 1;
-				break;
-			}
-			if (piece->piece[i][j] == '*' && map->map[solution->i + i][solution->j + j] == map->player)
+			if (piece->piece[i][j] == '*' && map->map[x + i][y + j] == map->enemy)
+				return (-1);
+			if (piece->piece[i][j] == '*' && map->map[x + i][y + j] == map->player)
 				touch++;
-			if (piece->piece[i][j] == '*' && ft_isdigit(map->map[solution->i + i][solution->j + j]))
-				new_score += map->map[solution->i + i][solution->j + j] - '0';
+			if (piece->piece[i][j] == '*' && ft_isdigit(map->map[x + i][y + j]))
+				score += map->map[x + i][y + j] - '0';
 			j++;
 		}
-		if (badspot)
-			break;
 		j = 0;
 		i++;
 	}
-	if ((new_score < solution->score || solution->score == 0) && touch == 1 && badspot == 0)
-	{
-		solution->x = solution->i;
-		solution->y = solution->j;
-		solution->score = new_score;
-	}
+	if (touch == 1)
+		return (score);
+	else
+		return (-1);
 }
 
 void		ft_place_piece(t_map *map, t_piece *piece)
 {
-	t_solution	solution;
+	t_solution	sol;
+	int			x;
+	int			y;
+	int			score;
 
-	ft_bzero(&solution, sizeof(t_solution));
-	while (solution.i + piece->x < map->x)
+	ft_bzero(&sol, sizeof(t_solution));
+	x = 0;
+	y = 0;
+	while (x + piece->x < map->x)
 	{
-		while (solution.j + piece->y < map->y)
+		while (y + piece->y < map->y)
 		{
-			get_score(map, piece, &solution);
-			solution.j++;
+			if ((score = valid_spot(map, piece, x, y)) > 0 && (score < sol.score || sol.score == 0))
+			{
+				sol.x = x;
+				sol.y =y;
+				sol.score = score;
+			}
+			y++;
 		}
-		solution.j = 0;
-		solution.i++;
+		y = 0;
+		x++;
 	}
-	send_solution(solution.x, solution.y);
+	send_solution(sol.x, sol.y);
 }

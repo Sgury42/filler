@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 11:30:22 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/21 16:30:39 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/25 16:39:41 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	place_score(t_map *map, int i, int j, int score_nb)
 {
 	char	score;
 
-	if (score_nb > 9)
-		score_nb = 9;
+//	if (score_nb > 9)
+//		score_nb = 9;
 	score = score_nb + '0';
 	if (j + 1 < map->y && map->map[i][j + 1] == '.')
 		map->map[i][j + 1] = score;
@@ -71,7 +71,7 @@ static void	set_zero(t_map *map)
 		{
 			if (map->map[i][j] == map->enemy)
 			{
-				place_score(map, i, j, 0);
+				place_score(map, i, j, -5);
 			}
 			j++;
 		}
@@ -80,32 +80,55 @@ static void	set_zero(t_map *map)
 	}
 	zero_cross(map);
 }
+/*
+static int	map_not_full(t_map *map)
+{
+	int	x;
+	int	y;
 
-void	ft_score_map(t_map *map)
+	x = 0;
+	y = 0;
+	while (map->map[x])
+	{
+		while (map->map[x][y])
+		{
+			if (map->map[x][y] == '.')
+				return (1);
+			y++;
+		}
+		y = 0;
+		x++;
+	}
+	return (0);
+}*/
+
+void		ft_score_map(t_map *map)
 {
 	int	i;
 	int	j;
 	int	score;
 
-	i = 0;
-	j = 0;
+	i = -1;
+	j = -1;
 	score = 1;
 	set_zero(map);
 	while (score < 10)
 	{
-		while (i < map->x)
+		while (++i < map->x)
 		{
-			while (j < map->y)
+			while (++j < map->y)
 			{
-				if (ft_isdigit(map->map[i][j]) && score - 1 == map->map[i][j] - '0')
+				if (ft_isdigit(map->map[i][j])
+						&& score - 1 == map->map[i][j] - '0')
+				{
 					place_score(map, i, j, score);
-				j++;
+				//	display_mapstruct(map);
+				}
 			}
-			i++;
-			j = 0;
+			j = -1;
 		}
 		score++;
-		i = 0;
-		j = 0;
+		i = -1;
+		j = -1;
 	}
 }
