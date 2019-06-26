@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:18:09 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/25 16:43:29 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/26 17:22:30 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(void)
 	t_map	map;
 	t_piece piece;
 
+	ft_bzero(&map, sizeof(t_map));
 	if ((get_next_line(0, &line)) < 0)
 		return (-1);
 	if (ft_strstr(line, "$$$"))
@@ -37,11 +38,13 @@ int	main(void)
 			if (ft_get_piece(&piece, line) < 0)
 				return (-1);
 //		display_mapstruct(&map);
-//		display_piece_struct(&piece);
+		display_piece_struct(&piece);
 		ft_score_map(&map);
 //		display_mapstruct(&map);
-		ft_place_piece(&map, &piece);
+		if (ft_place_piece(&map, &piece) == 0)
+			break;
 		ft_clear_data(map.map, piece.piece); 
 	}
+	ft_clear_data(map.map, piece.piece);
 	return (0);
 }

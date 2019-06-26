@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 10:15:42 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/25 15:52:22 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/26 17:24:08 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	valid_spot(t_map *map, t_piece *piece, int x, int y)
 	j = 0;
 	touch = 0;
 	score = 0;
-	while (i < piece->x)
+	while (i < piece->height)
 	{
-		while (j < piece->y)
+		while (j < piece->width)
 		{
 			if (piece->piece[i][j] == '*' && map->map[x + i][y + j] == map->enemy)
 				return (-1);
@@ -56,7 +56,7 @@ static int	valid_spot(t_map *map, t_piece *piece, int x, int y)
 		return (-1);
 }
 
-void		ft_place_piece(t_map *map, t_piece *piece)
+int			ft_place_piece(t_map *map, t_piece *piece)
 {
 	t_solution	sol;
 	int			x;
@@ -66,14 +66,14 @@ void		ft_place_piece(t_map *map, t_piece *piece)
 	ft_bzero(&sol, sizeof(t_solution));
 	x = 0;
 	y = 0;
-	while (x + piece->x < map->x)
+	while (x + piece->height < map->x)
 	{
-		while (y + piece->y < map->y)
+		while (y + piece->width < map->y)
 		{
 			if ((score = valid_spot(map, piece, x, y)) > 0 && (score < sol.score || sol.score == 0))
 			{
-				sol.x = x;
-				sol.y =y;
+				sol.x = x - piece->empty_lines_bfr;
+				sol.y = y - piece->empty_col_bfr;
 				sol.score = score;
 			}
 			y++;
@@ -82,4 +82,7 @@ void		ft_place_piece(t_map *map, t_piece *piece)
 		x++;
 	}
 	send_solution(sol.x, sol.y);
+	if (sol.x == 0 &&  sol.y == 0)
+		return (0);
+	return (1);
 }

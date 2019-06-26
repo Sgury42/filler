@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 11:30:22 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/25 16:39:41 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/26 14:12:40 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ static void	set_zero(t_map *map)
 
 	i = 0;
 	j = 0;
-	while (map->map[i])
+	while (i < map->x)
 	{
-		while (map->map[i][j])
+		while (j < map->y)
 		{
 			if (map->map[i][j] == map->enemy)
 			{

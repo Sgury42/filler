@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/25 14:48:39 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/26 17:58:09 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ typedef struct	s_piece
 	int 	x;
 	int 	y;
 	char	**piece;
+	int		empty_col;
+	int		empty_lines;
+	int		empty_col_aft;
+	int		height;
+	int		width;
 }				t_piece;
 
 typedef struct	s_solution
@@ -44,7 +49,7 @@ int				ft_get_map(t_map *map, char *buff);
 int				ft_get_piece(t_piece *piece, char *buff);
 void			ft_clear_data(char **map, char **piece);
 void			ft_score_map(t_map *map);
-void			ft_place_piece(t_map *map, t_piece *piece);
+int				ft_place_piece(t_map *map, t_piece *piece);
 
 
 /*			FONCTIONS FOR TESTS			*/
