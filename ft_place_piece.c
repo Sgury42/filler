@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 10:15:42 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/26 17:24:08 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/27 11:19:20 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static int	valid_spot(t_map *map, t_piece *piece, int x, int y)
 		{
 			if (piece->piece[i][j] == '*' && map->map[x + i][y + j] == map->enemy)
 				return (-1);
-			if (piece->piece[i][j] == '*' && map->map[x + i][y + j] == map->player)
+			else if (piece->piece[i][j] == '*' && map->map[x + i][y + j] == map->player)
 				touch++;
-			if (piece->piece[i][j] == '*' && ft_isdigit(map->map[x + i][y + j]))
-				score += map->map[x + i][y + j] - '0';
+			else if (piece->piece[i][j] == '*')
+				score += map->map[x + i][y + j];
 			j++;
 		}
 		j = 0;
@@ -72,9 +72,11 @@ int			ft_place_piece(t_map *map, t_piece *piece)
 		{
 			if ((score = valid_spot(map, piece, x, y)) > 0 && (score < sol.score || sol.score == 0))
 			{
-				sol.x = x - piece->empty_lines_bfr;
-				sol.y = y - piece->empty_col_bfr;
+				sol.x = x - piece->empty_lines;
+				sol.y = y - piece->empty_col;
 				sol.score = score;
+				if (sol.x == 0 && sol.y == 0)
+					sol.score = 0;
 			}
 			y++;
 		}
@@ -82,7 +84,7 @@ int			ft_place_piece(t_map *map, t_piece *piece)
 		x++;
 	}
 	send_solution(sol.x, sol.y);
-	if (sol.x == 0 &&  sol.y == 0)
+	if (sol.x == 0 && sol.y == 0)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:18:09 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/26 17:22:30 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/27 13:49:33 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	main(void)
 			if (ft_get_piece(&piece, line) < 0)
 				return (-1);
 //		display_mapstruct(&map);
-		display_piece_struct(&piece);
+//		display_piece_struct(&piece);
 		ft_score_map(&map);
-//		display_mapstruct(&map);
+		display_mapstruct(&map);
 		if (ft_place_piece(&map, &piece) == 0)
 			break;
 		ft_clear_data(map.map, piece.piece); 

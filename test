@@ -1,0 +1,31 @@
+Plateau 24 40:
+	0123456789012345678901234567890123456789
+000 ...................XX...................
+001 ...................XXXX.................
+002 ....OO.............XXX...............XX.
+003 ...OOO.............XX...............XXX.
+004 ....OO.............XX..............XXXX.
+005 .....O.............XX...........XXX.XXX.
+006 ...................XXX..........XXX.XXX.
+007 ...................XXX..........XX....X.	
+008 ...................XXX........XXXXX..XX.
+009 ....................XX.......XX..X.XX.X.
+010 ....................XX......XX.XX.XXXXX.
+011 XXXXXXXXXX.XX.XXXXXXXXXXX...XXXXX.XXXXX.
+012 XXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+013 ...XXXX..XX...XXXX.XXXXXXXXX.XXXXX...XX.
+014 .........X....XXX..XX.X..XXX....XXX..XX.
+015 .............XXXX..XX.XXXX.XXXXX.XX..XX.
+016 ..............X..XXXXXXXXX.X.XX..X.X.XX.
+017 .............XXX..XXX...XXXXX.X..XXXX.X.
+018 ............XX.X...XXXXXXXXXX.X.XXXXXXX.
+019 .........XX.XXXXXXXXXXXXXXXXXXXXXXXXXXX.
+020 ..........XXXXXXXX.XXXXX...XX.X....XX...
+021 ........XXX....XXXXXXXX...XX.XXXX.XXXX..
+022 ..............XXXXXXXXXXXxxX..XXX...X...
+023 ........................................
+Piece 4 4:
+.*..
+***.
+.***
+....
