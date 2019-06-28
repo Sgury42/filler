@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/26 17:58:09 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/28 10:46:17 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_solution
 int				ft_get_players(t_map *map, char *buff);
 int				ft_get_map(t_map *map, char *buff);
 int				ft_get_piece(t_piece *piece, char *buff);
-void			ft_clear_data(char **map, char **piece);
+void			ft_clear_data(t_map *map, t_piece *piece);
 void			ft_score_map(t_map *map);
 int				ft_place_piece(t_map *map, t_piece *piece);
 

@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 11:30:22 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/27 14:14:12 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/28 10:34:49 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,15 @@ static int	map_not_full(t_map *map)
 	int	y;
 
 	x = 0;
-	y = 0;
-	while (map->map[x])
+	while (x < map->x)
 	{
-		while (map->map[x][y])
+		y = 0;
+		while (y < map->y)
 		{
 			if (map->map[x][y] == '.')
 				return (1);
 			y++;
 		}
-		y = 0;
 		x++;
 	}
 	return (0);
@@ -114,10 +113,10 @@ static void	fullfillmap(t_map *map)
 	int	y;
 
 	x = 0;
-	while (map->map[x])
+	while (x < map->x)
 	{
 		y = 0;
-		while (map->map[x][y])
+		while (y < map->y)
 		{
 			if (map->map[x][y] == '.')
 				map->map[x][y] = 126;

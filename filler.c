@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:18:09 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/27 13:49:33 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/28 12:25:53 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(void)
 			return (-1);
 	while (1)
 	{
+//		display_mapstruct(&map);
+//		display_piece_struct(&piece);
 		if ((get_next_line(0, &line)) < 0)
 			return (-1);
 		if (ft_strstr(line, "Plateau"))
@@ -40,11 +42,13 @@ int	main(void)
 //		display_mapstruct(&map);
 //		display_piece_struct(&piece);
 		ft_score_map(&map);
-		display_mapstruct(&map);
+//		display_mapstruct(&map);
 		if (ft_place_piece(&map, &piece) == 0)
 			break;
-		ft_clear_data(map.map, piece.piece); 
+		ft_clear_data(&map, &piece); 
 	}
-	ft_clear_data(map.map, piece.piece);
+//	ft_clear_data(map.map, piece.piece);
+	ft_bzero(&map, sizeof(t_map));
+	ft_bzero(&piece, sizeof(t_piece));
 	return (0);
 }
