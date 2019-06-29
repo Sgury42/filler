@@ -6,7 +6,7 @@
 #    By: sgury <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/21 09:55:16 by sgury             #+#    #+#              #
-#    Updated: 2019/06/26 14:09:22 by sgury            ###   ########.fr        #
+#    Updated: 2019/06/29 10:36:05 by sgury            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ INCLUDES = filler.h
 
 LIBFT = ./libft/libft.a
 
-CC = gcc
+CC = gcc -g
 
 CFLAGS = -Wall -Wextra -Werror
 

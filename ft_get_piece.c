@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 15:00:08 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/28 12:34:30 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/29 16:23:13 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ int			ft_get_piece(t_piece *piece, char *line)
 		ft_strdel(&line);
 //		buff = tmp;
 		length++;
+//		ft_putstr_fd("buff :", 2);
+//		ft_putendl_fd(buff, 2);
 	}
 	empty_lines(piece, buff);
 	empty_columns(piece, buff);

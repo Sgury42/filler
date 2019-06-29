@@ -6,22 +6,26 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 10:15:42 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/28 11:05:09 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/29 16:23:11 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"filler.h"
 
-static void	send_solution(int x, int y)
+static int	send_solution(int x, int y)
 {
-	char	solution[50];
+	char	*solution;
 
-	ft_bzero(solution, sizeof(solution));
-	ft_strcat(solution, ft_itoa(x));
-	ft_strcat(solution, " ");
-	ft_strcat(solution, ft_itoa(y));
-	ft_strcat(solution, "\n");
-	ft_putstr_fd(solution, 1);
+	if ((solution = ft_itoa(x)) == NULL)
+		return (-1);
+	ft_putstr(solution);
+	ft_strdel(&solution);
+	ft_putchar(' ');
+	if ((solution = ft_itoa(y)) == NULL)
+		return (-1);
+	ft_putendl(solution);
+	ft_strdel(&solution);
+	return (0);
 }
 
 static int	valid_spot(t_map *map, t_piece *piece, int x, int y)
@@ -32,11 +36,11 @@ static int	valid_spot(t_map *map, t_piece *piece, int x, int y)
 	int	score;
 
 	i = 0;
-	j = 0;
 	touch = 0;
 	score = 0;
 	while (i < piece->height)
 	{
+		j = 0;
 		while (j < piece->width)
 		{
 			if (piece->piece[i][j] == '*' && map->map[x + i][y + j] == map->enemy)
@@ -47,7 +51,6 @@ static int	valid_spot(t_map *map, t_piece *piece, int x, int y)
 				score += map->map[x + i][y + j];
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 	if (touch == 1)
@@ -65,9 +68,9 @@ int			ft_place_piece(t_map *map, t_piece *piece)
 
 	ft_bzero(&sol, sizeof(t_solution));
 	x = 0;
-	y = 0;
 	while (x + piece->height < map->x)
 	{
+		y = 0;
 		while (y + piece->width < map->y)
 		{
 			if ((score = valid_spot(map, piece, x, y)) > 0 && (score < sol.score || sol.score == 0))
@@ -80,10 +83,10 @@ int			ft_place_piece(t_map *map, t_piece *piece)
 			}
 			y++;
 		}
-		y = 0;
 		x++;
 	}
-	send_solution(sol.x, sol.y);
+	if ((send_solution(sol.x, sol.y)) < 0)
+		return (-1);
 	if (sol.x == 0 && sol.y == 0)
 		return (0);
 	return (1);
