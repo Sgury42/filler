@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 10:15:42 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/29 16:23:11 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/30 14:19:30 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int			ft_place_piece(t_map *map, t_piece *piece)
 
 	ft_bzero(&sol, sizeof(t_solution));
 	x = 0;
-	while (x + piece->height < map->x)
+	while (x + piece->height <= map->x)
 	{
 		y = 0;
-		while (y + piece->width < map->y)
+		while (y + piece->width <= map->y)
 		{
 			if ((score = valid_spot(map, piece, x, y)) > 0 && (score < sol.score || sol.score == 0))
 			{

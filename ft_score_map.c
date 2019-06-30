@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 11:30:22 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/30 12:04:14 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/30 14:02:19 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,26 +127,25 @@ void		ft_score_map(t_map *map)
 	int		j;
 	char	score;
 
-	i = -1;
-	j = -1;
 	score = '1';
 	set_zero(map);
 	while (map_not_full(map) && score < 126)
 	{
-		while (++i < map->x)
+		i = 0;
+		while (i < map->x)
 		{
-			while (++j < map->y)
+			j = 0;
+			while (j < map->y)
 			{
 				if (!(ft_strchr(".XO", map->map[i][j])) && score - 1 == map->map[i][j])
 					place_score(map, i, j, score);
+				j++;
 			}
-			j = -1;
+			i++;
 		}
 		score++;
 		if (ft_strchr("XO", score))
 			score++;
-		i = -1;
-		j = -1;
 	}
 	fullfillmap(map);
 }
