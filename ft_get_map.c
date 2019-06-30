@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:02:11 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/28 10:28:12 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/30 10:26:50 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ int			parse_line(t_map *map, char *line, int i)
 	while (line[k] && !(ft_strchr(".oOxX", line[k])))
 		k++;
 	while (j < map->y && ft_strchr(".oOxX", line[k]))
+	{
+		if (map->player_xstart == 0 && line[k] == map->player)
+			map->player_xstart = i;
 		map->map[i][j++] = ft_toupper(line[k++]);
+	}
 	map->map[i][j] = '\0';
 	ft_strdel(&line);
 	return (0);

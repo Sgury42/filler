@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 11:30:22 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/28 10:34:49 by sgury            ###   ########.fr       */
+/*   Updated: 2019/06/30 12:04:14 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 static void	place_score(t_map *map, int i, int j, char score)
 {
-//	char	score;
-
-//	if (score_nb > 9)
-//		score_nb = 9;
-//	score = score_nb + '0';
 	if (j + 1 < map->y && map->map[i][j + 1] == '.')
 		map->map[i][j + 1] = score;
 	if (i + 1 < map->x && map->map[i + 1][j] == '.')
@@ -52,9 +47,9 @@ static void	zero_cross(t_map *map)
 		i++;
 	}
 	middle = map->x / 2;
-	if (map->player == 'O' && map->x > 6)
+	if (map->player_xstart < middle && map->x > 15)
 		middle /= 2;
-	else if (map->player == 'X' && map-> x > 6)
+	else if (map->player_xstart > middle && map->x > 15)
 		middle += middle / 2 - 1;
 	while (j < map->y)
 	{
@@ -138,22 +133,18 @@ void		ft_score_map(t_map *map)
 	set_zero(map);
 	while (map_not_full(map) && score < 126)
 	{
-//		ft_putstr_fd("score = ", 2);
-//		ft_putchar_fd(score, 2);
-//		ft_putchar_fd('\n', 2);
 		while (++i < map->x)
 		{
 			while (++j < map->y)
 			{
 				if (!(ft_strchr(".XO", map->map[i][j])) && score - 1 == map->map[i][j])
-				{
 					place_score(map, i, j, score);
-				//	display_mapstruct(map);
-				}
 			}
 			j = -1;
 		}
 		score++;
+		if (ft_strchr("XO", score))
+			score++;
 		i = -1;
 		j = -1;
 	}
