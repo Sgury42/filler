@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 11:30:22 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/30 14:02:19 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/01 10:16:11 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,43 +82,27 @@ static void	set_zero(t_map *map)
 	zero_cross(map);
 }
 
-static int	map_not_full(t_map *map)
+static int	checkmap_full(t_map *map, int fullfill)
 {
 	int	x;
 	int	y;
 
-	x = 0;
-	while (x < map->x)
+	x = -1;
+	while (++x < map->x)
 	{
-		y = 0;
-		while (y < map->y)
+		y = -1;
+		while (++y < map->y)
 		{
 			if (map->map[x][y] == '.')
-				return (1);
-			y++;
+			{
+				if (fullfill == 1)
+					map->map[x][y] = 126;
+				else
+					return (1);
+			}
 		}
-		x++;
 	}
 	return (0);
-}
-
-static void	fullfillmap(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < map->x)
-	{
-		y = 0;
-		while (y < map->y)
-		{
-			if (map->map[x][y] == '.')
-				map->map[x][y] = 126;
-			y++;
-		}
-		x++;
-	}
 }
 
 void		ft_score_map(t_map *map)
@@ -129,23 +113,22 @@ void		ft_score_map(t_map *map)
 
 	score = '1';
 	set_zero(map);
-	while (map_not_full(map) && score < 126)
+	while (checkmap_full(map, 0) && score < 126)
 	{
-		i = 0;
-		while (i < map->x)
+		i = -1;
+		while (++i < map->x)
 		{
-			j = 0;
-			while (j < map->y)
+			j = -1;
+			while (++j < map->y)
 			{
-				if (!(ft_strchr(".XO", map->map[i][j])) && score - 1 == map->map[i][j])
+				if (!(ft_strchr(".XO", map->map[i][j]))
+						&& score - 1 == map->map[i][j])
 					place_score(map, i, j, score);
-				j++;
 			}
-			i++;
 		}
 		score++;
 		if (ft_strchr("XO", score))
 			score++;
 	}
-	fullfillmap(map);
+	checkmap_full(map, 1);
 }

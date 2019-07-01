@@ -6,13 +6,13 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 15:00:08 by sgury             #+#    #+#             */
-/*   Updated: 2019/06/30 15:58:01 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/01 12:20:06 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static void	get_piece_size(t_piece *piece, char *line)
+static int	get_piece_size(t_piece *piece, char *line)
 {
 	int	i;
 
@@ -24,45 +24,17 @@ static void	get_piece_size(t_piece *piece, char *line)
 		i++;
 	piece->y = ft_atoi(&line[i]);
 	ft_strdel(&line);
+	if (piece->x == 0 || piece->y == 0)
+		return (-1);
+	return (0);
 }
 
-static void	empty_lines(t_piece *piece, char *buff)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	while (buff[i] && buff[i] == '.')
-		i++;
-	piece->empty_lines = i / piece->y;
-	i = ft_strlen(buff) - 1;
-	count = 0;
-	while (buff[i] && buff[i--] == '.')
-		count++;
-	piece->height = piece->x - piece->empty_lines - (count / piece->y);
-}
-
-static void	empty_columns(t_piece *piece, char *buff)
+static void	empty_aft(t_piece *piece, char *buff)
 {
 	int	i;
 	int	j;
 	int	count;
 
-	i = -1;
-	while (++i < piece->y)
-	{
-		count = 0;
-		j = i;
-		while (buff[j] && buff[j] == '.')
-		{
-			j += piece->y;
-			count++;
-		}
-		if (count == piece->x)
-			piece->empty_col++;
-		else
-			break ;
-	}
 	i = piece->y - 1;
 	while (i > 0)
 	{
@@ -80,6 +52,36 @@ static void	empty_columns(t_piece *piece, char *buff)
 		i--;
 	}
 	piece->width = piece->y - piece->empty_col - piece->empty_col_aft;
+}
+
+static void	empty_space(t_piece *piece, char *buff)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	while (buff[i] && buff[i] == '.')
+		i++;
+	piece->empty_lines = i / piece->y;
+	i = ft_strlen(buff) - 1;
+	count = 0;
+	while (buff[i] && buff[i--] == '.')
+		count++;
+	piece->height = piece->x - piece->empty_lines - (count / piece->y);
+	i = -1;
+	while (++i < piece->y)
+	{
+		count = 0;
+		j = i;
+		while (buff[j] && buff[j] == '.' && count++)
+			j += piece->y;
+		if (count == piece->x)
+			piece->empty_col++;
+		else
+			break ;
+	}
+	empty_aft(piece, buff);
 }
 
 static int	parse_piece(t_piece *piece, char *buff)
@@ -116,8 +118,8 @@ int			ft_get_piece(t_piece *piece, char *line)
 
 	length = 0;
 	ft_bzero(piece, sizeof(t_piece));
-	get_piece_size(piece, line);
-	if ((buff = ft_strnew(piece->x * piece->y)) == NULL)
+	if (ft_strstr(line, "Piece") == NULL || get_piece_size(piece, line) < 0
+			|| (buff = ft_strnew(piece->x * piece->y)) == NULL)
 		return (-1);
 	while (length < piece->x)
 	{
@@ -127,8 +129,7 @@ int			ft_get_piece(t_piece *piece, char *line)
 		ft_strdel(&line);
 		length++;
 	}
-	empty_lines(piece, buff);
-	empty_columns(piece, buff);
+	empty_space(piece, buff);
 	if (parse_piece(piece, buff) < 0)
 		return (-1);
 	ft_strdel(&buff);
