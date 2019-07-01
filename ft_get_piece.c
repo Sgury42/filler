@@ -120,7 +120,10 @@ int			ft_get_piece(t_piece *piece, char *line)
 	ft_bzero(piece, sizeof(t_piece));
 	if (ft_strstr(line, "Piece") == NULL || get_piece_size(piece, line) < 0
 			|| (buff = ft_strnew(piece->x * piece->y)) == NULL)
+	{
+		ft_putstr_fd("TEST\n", 2);
 		return (-1);
+	}
 	while (length < piece->x)
 	{
 		if ((get_next_line(0, &line)) < 0)
@@ -129,6 +132,8 @@ int			ft_get_piece(t_piece *piece, char *line)
 		ft_strdel(&line);
 		length++;
 	}
+	if (ft_piece_valid(piece, buff) < 0)
+		return (-1);
 	empty_space(piece, buff);
 	if (parse_piece(piece, buff) < 0)
 		return (-1);

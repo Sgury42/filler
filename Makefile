@@ -16,6 +16,7 @@ SRCS = filler.c \
 	   ft_get_players.c \
 	   ft_get_map.c \
 	   ft_get_piece.c \
+	   check_if_valid.c \
 	   ft_score_map.c \
 	   ft_place_piece.c \
 	   ft_clear_data.c \

@@ -51,6 +51,7 @@ int				ft_get_piece(t_piece *piece, char *buff);
 void			ft_clear_data(t_map *map, t_piece *piece);
 void			ft_score_map(t_map *map);
 int				ft_place_piece(t_map *map, t_piece *piece);
+int			ft_piece_valid(t_piece *piece, char *buff);
 
 
 /*			FONCTIONS FOR TESTS			*/

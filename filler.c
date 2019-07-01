@@ -57,7 +57,6 @@ int			main(void)
 		}
 	if ((filler(&map, &piece, line)) < 0)
 	{
-		ft_clear_data(&map, &piece);
 		perror("");
 		return (-1);
 	}
