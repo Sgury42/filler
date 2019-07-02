@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 15:00:08 by sgury             #+#    #+#             */
-/*   Updated: 2019/07/01 12:20:06 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/02 11:15:22 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	get_piece_size(t_piece *piece, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	piece->y = ft_atoi(&line[i]);
-	ft_strdel(&line);
 	if (piece->x == 0 || piece->y == 0)
 		return (-1);
+	ft_strdel(&line);
 	return (0);
 }
 
@@ -70,9 +70,8 @@ static void	empty_space(t_piece *piece, char *buff)
 		count++;
 	piece->height = piece->x - piece->empty_lines - (count / piece->y);
 	i = -1;
-	while (++i < piece->y)
+	while (++i < piece->y && (count = 0))
 	{
-		count = 0;
 		j = i;
 		while (buff[j] && buff[j] == '.' && count++)
 			j += piece->y;
@@ -114,25 +113,23 @@ static int	parse_piece(t_piece *piece, char *buff)
 int			ft_get_piece(t_piece *piece, char *line)
 {
 	int		length;
+	int		ret;
 	char	*buff;
 
-	length = 0;
 	ft_bzero(piece, sizeof(t_piece));
 	if (ft_strstr(line, "Piece") == NULL || get_piece_size(piece, line) < 0
 			|| (buff = ft_strnew(piece->x * piece->y)) == NULL)
 	{
-		ft_putstr_fd("TEST\n", 2);
+		ft_strdel(&line);
 		return (-1);
 	}
-	while (length < piece->x)
+	length = -1;
+	while (++length < piece->x && (ret = get_next_line(0, &line)) > 0)
 	{
-		if ((get_next_line(0, &line)) < 0)
-			return (-1);
 		ft_strcat(buff, line);
 		ft_strdel(&line);
-		length++;
 	}
-	if (ft_piece_valid(piece, buff) < 0)
+	if (ret < 0 || ft_piece_valid(piece, buff) < 0)
 		return (-1);
 	empty_space(piece, buff);
 	if (parse_piece(piece, buff) < 0)

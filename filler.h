@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/07/01 12:06:31 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/02 09:57:47 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int				ft_get_players(t_map *map, char *buff);
 int				ft_get_map(t_map *map, char *buff);
 int				ft_get_piece(t_piece *piece, char *buff);
 void			ft_clear_data(t_map *map, t_piece *piece);
+void			ft_clear_map(t_map *map);
+void			ft_clear_piece(t_piece *piece);
 void			ft_score_map(t_map *map);
 int				ft_place_piece(t_map *map, t_piece *piece);
 int			ft_piece_valid(t_piece *piece, char *buff);

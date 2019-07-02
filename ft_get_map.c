@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:02:11 by sgury             #+#    #+#             */
-/*   Updated: 2019/07/01 11:46:04 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/02 11:09:28 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	get_map_size(t_map *map, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	map->y = ft_atoi(&line[i]);
-	ft_strdel(&line);
 	if (map->x == 0 || map->y == 0)
 		return (-1);
+	ft_strdel(&line);
 	return (0);
 }
 
@@ -46,10 +46,10 @@ int			parse_line(t_map *map, char *line, int i)
 			map->player_xstart = i;
 		map->map[i][j++] = ft_toupper(line[k++]);
 	}
+	ft_strdel(&line);
+	map->map[i][j] = '\0';
 	if (j != map->y)
 		return (-1);
-	map->map[i][j] = '\0';
-	ft_strdel(&line);
 	return (0);
 }
 
@@ -58,12 +58,12 @@ int			ft_get_map(t_map *map, char *line)
 	int	length;
 
 	length = 0;
-	if (ft_strstr(line, "Plateau") == NULL)
+	if (ft_strstr(line, "Plateau") == NULL || get_map_size(map, line) < 0
+		|| (map->map = (char **)malloc(sizeof(char *) * (map->x + 1))) == NULL)
+	{
+		ft_strdel(&line);
 		return (-1);
-	if (get_map_size(map, line) < 0)
-		return (-1);
-	if ((map->map = (char **)malloc(sizeof(char *) * (map->x + 1))) == NULL)
-		return (-1);
+	}
 	if ((get_next_line(0, &line)) < 0)
 		return (-1);
 	ft_strdel(&line);
@@ -71,12 +71,11 @@ int			ft_get_map(t_map *map, char *line)
 	{
 		if ((get_next_line(0, &line)) < 0)
 			return (-1);
-		if (parse_line(map, line, length) < 0)
+		if (parse_line(map, line, length++) < 0 && (map->map[length] = 0))
 			return (-1);
-		length++;
 	}
+	map->map[length] = 0;
 	if (length != map->x)
 		return (-1);
-	map->map[length] = 0;
 	return (0);
 }

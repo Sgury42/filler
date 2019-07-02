@@ -6,25 +6,42 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 15:31:45 by sgury             #+#    #+#             */
-/*   Updated: 2019/07/01 12:27:39 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/02 10:58:21 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	ft_clear_data(t_map *map, t_piece *piece)
+void	ft_clear_map(t_map *map)
 {
 	int	i;
 
 	i = 0;
-	while (map->map[i])
-		ft_strdel(&map->map[i++]);
-	if (map->map)
-		free(map->map);
+	if (map->map != NULL)
+	{
+		while (map->map[i])
+			ft_strdel(&map->map[i++]);
+		if (map->map)
+			free(map->map);
+	}
+}
+
+void	ft_clear_piece(t_piece *piece)
+{
+	int	i;
+
 	i = 0;
-	while (piece->piece[i])
-		ft_strdel(&piece->piece[i++]);
-	if (piece->piece)
-		free(piece->piece);
-	ft_bzero(&piece, sizeof(piece));
+	if (piece->piece != NULL)
+	{
+		while (piece->piece[i])
+			ft_strdel(&piece->piece[i++]);
+		if (piece->piece)
+			free(piece->piece);
+	}
+}
+
+void	ft_clear_data(t_map *map, t_piece *piece)
+{
+	ft_clear_map(map);
+	ft_clear_piece(piece);
 }

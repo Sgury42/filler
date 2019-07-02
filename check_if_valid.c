@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_if_valid.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/02 10:58:58 by sgury             #+#    #+#             */
+/*   Updated: 2019/07/02 10:59:18 by sgury            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
 int	ft_piece_valid(t_piece *piece, char *buff)
@@ -6,11 +18,12 @@ int	ft_piece_valid(t_piece *piece, char *buff)
 	int	i;
 
 	i = 0;
-	if ((len = ft_strlen(buff)) != piece->x * piece->y)
-		return (-1);
 	while (buff[i] && ft_strchr(".*", buff[i]))
 		i++;
-	if (i != len)
+	if ((len = ft_strlen(buff)) != piece->x * piece->y || i != len)
+	{
+		ft_strdel(&buff);
 		return (-1);
+	}
 	return (0);
 }
