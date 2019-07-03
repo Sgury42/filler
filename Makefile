@@ -6,7 +6,7 @@
 #    By: sgury <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/21 09:55:16 by sgury             #+#    #+#              #
-#    Updated: 2019/07/03 10:52:16 by sgury            ###   ########.fr        #
+#    Updated: 2019/07/03 11:21:40 by sgury            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ OBJS = $(SRCS:.c=.o)
 
 INCLUDES = filler.h
 
+LIB_C_PATH = ./libft/
+
 LIBFT = ./libft/libft.a
 
 CC = gcc -g
@@ -39,19 +41,21 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ $(DISPLAY) $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $^ $(DISPLAY) $(LIBFT) -I $(INCLUDES)
 
-%.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS)
+%.o: %.c $(LIBFT)
+	$(CC) -o $@ -c $< $(CFLAGS) -I $(INCLUDES)
 
 $(LIBFT):
-	make -C libft/
+	make -C $(LIB_C_PATH)
 
 clean:
 	rm -rf $(OBJS)
+	make clean -C $(LIB_C_PATH)
 
 fclean: clean
 	rm -rf $(NAME)
+	make fclean -C $(LIB_C_PATH)
 
 re: fclean all
 
