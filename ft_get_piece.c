@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 15:00:08 by sgury             #+#    #+#             */
-/*   Updated: 2019/07/02 11:15:22 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/03 10:53:57 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ static void	empty_aft(t_piece *piece, char *buff)
 	int	i;
 	int	j;
 	int	count;
+	int	bufflen;
 
 	i = piece->y - 1;
+	bufflen = piece->x * piece->y - 1;
 	while (i > 0)
 	{
 		j = i;
 		count = 0;
-		while (buff[j] && buff[j] == '.')
+		while (buff[j] && j < bufflen && buff[j] == '.')
 		{
 			j += piece->y;
 			count++;

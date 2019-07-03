@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:08:59 by sgury             #+#    #+#             */
-/*   Updated: 2019/07/02 09:57:47 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/03 10:56:44 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ typedef struct	s_map
 	char	player;
 	char	enemy;
 	int		player_xstart;
-	int		x;		//height
-	int 	y;		//width
+	int		x;
+	int		y;
 	char	**map;
 }				t_map;
 
 typedef struct	s_piece
 {
-	int 	x;
-	int 	y;
+	int		x;
+	int		y;
 	char	**piece;
 	int		empty_col;
 	int		empty_lines;
@@ -53,8 +53,7 @@ void			ft_clear_map(t_map *map);
 void			ft_clear_piece(t_piece *piece);
 void			ft_score_map(t_map *map);
 int				ft_place_piece(t_map *map, t_piece *piece);
-int			ft_piece_valid(t_piece *piece, char *buff);
-
+int				ft_piece_valid(t_piece *piece, char *buff);
 
 /*			FONCTIONS FOR TESTS			*/
 

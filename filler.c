@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:18:09 by sgury             #+#    #+#             */
-/*   Updated: 2019/07/02 11:22:17 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/03 10:53:26 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			main(void)
 
 	ft_bzero(&map, sizeof(t_map));
 	ft_bzero(&piece, sizeof(t_piece));
-	if ((get_next_line(0, &line)) < 0)
+	if ((get_next_line(0, &line)) <= 0)
 	{
 		perror("");
 		return (-1);
@@ -57,7 +57,6 @@ int			main(void)
 	}
 	if ((filler(&map, &piece, line)) < 0)
 	{
-		ft_putstr_fd("TEST\n", 2);
 		ft_clear_data(&map, &piece);
 		perror("");
 		return (-1);

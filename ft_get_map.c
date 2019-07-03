@@ -6,7 +6,7 @@
 /*   By: sgury <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:02:11 by sgury             #+#    #+#             */
-/*   Updated: 2019/07/02 11:09:28 by sgury            ###   ########.fr       */
+/*   Updated: 2019/07/03 10:02:50 by sgury            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,17 @@ int			ft_get_map(t_map *map, char *line)
 		ft_strdel(&line);
 		return (-1);
 	}
+	ft_memset(map->map, 0, sizeof(map->map));
 	if ((get_next_line(0, &line)) < 0)
 		return (-1);
 	ft_strdel(&line);
 	while (length < map->x)
 	{
-		if ((get_next_line(0, &line)) < 0)
+		if ((get_next_line(0, &line)) <= 0)
 			return (-1);
-		if (parse_line(map, line, length++) < 0 && (map->map[length] = 0))
+		if (parse_line(map, line, length) < 0)
 			return (-1);
+		length++;
 	}
 	map->map[length] = 0;
 	if (length != map->x)
